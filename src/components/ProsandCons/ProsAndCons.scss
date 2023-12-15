@@ -1,0 +1,77 @@
+.prosandcons{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
+.pros {
+    width: 50vh;
+    background-color:#02c39a;
+    height:145px
+}
+
+.pros h2 {
+    color: white;
+    margin-top: 10px;
+}
+.pros ul {
+    list-style: none;
+    color: white;
+    margin-top: 20px;
+}
+
+.cons {
+    width: 50vh;
+    background-color:#dacf3c;
+    height:145px
+}
+
+.cons ul {
+    list-style: none;
+    color: white;
+    margin-top: 20px;
+}
+.cons h2 {
+    color: white;
+    margin-top: 10px;
+}
+
+.btn-danger {
+    background-color: red;
+    color: white;
+}
+ 
+.btn-success {
+    background-color:#02c39a;
+    // color: white;
+}
+
+.btn-success:disabled {
+    background-color: #02c39a;
+    color: white;
+    opacity: 0.75;
+    border: none;
+}
+
+.btn-yellow {
+    background-color: #dacf3c;
+    color: white;
+  }
+
+.btn-yellow:disabled {
+    background-color: #dacf3c;
+    color: white;
+    opacity: 0.75;
+    border: none;
+}
+
+.invalid-value {
+    color: #e32323;
+    font-size: 0.725rem;
+    text-align: start;
+    margin-left: 15px;
+    // margin-top: 0;
+    // width: 100%;
+  }
