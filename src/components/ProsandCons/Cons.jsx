@@ -7,17 +7,27 @@ import {v4 as uuidv4} from 'uuid'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from "@mui/material";
 import { validationValues } from "../Utils";
-
+import ReactPaginate from 'react-paginate';
 
 const Cons = (props) => {
 
     const consValues = useSelector(selectConsValues)
     const [consValue, setConsValue] = useState('');
     const [errorMessage, setErrorMessage] = useState('')
+    const [currentPage, setCurrentPage] = useState(0); // Current page state
     const dispatch = useDispatch()
 
     const consValuesInArray = Object.entries(consValues)
+    const itemsPerPage = 10; // Number of items per page
+    const pageCount = Math.ceil(consValuesInArray.length / itemsPerPage);
+
    
+
+  // Calculate the current items to display based on currentPage
+  const indexOfLastItem = (currentPage + 1) * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = consValuesInArray.slice(indexOfFirstItem, indexOfLastItem);
+
     const handleConsChange = (e) => {
           setConsValue(e.target.value);
           const error =  validationValues (e.target.value, consValuesInArray)
@@ -33,6 +43,11 @@ const Cons = (props) => {
   const handleDeleteConsItems = () => {
       dispatch(deleteConsItems())
   }
+
+   // Function to handle page change
+   const handlePageChange = ({ selected }) => {
+    setCurrentPage(selected);
+  };
 
     return(
       <div className='cons'>
@@ -67,7 +82,7 @@ const Cons = (props) => {
             </div>
             
             <ul className='ps-0'>
-                {consValues && Object.entries(consValues).map((item,index) => ( 
+                {consValues && currentItems.map((item,index) => ( 
                     <ConsItems 
                       key={item[0]}
                       value = {item[1]}
@@ -75,6 +90,14 @@ const Cons = (props) => {
                       consItems={consValuesInArray} 
                     />
                 ))}
+                <ReactPaginate
+                  pageCount={pageCount}
+                  pageRangeDisplayed={5} // Number of page numbers to display
+                  // marginPagesDisplayed={2} // Number of pages to display for the margins
+                  onPageChange={handlePageChange}
+                  containerClassName={'pagination'}
+                  activeClassName={'active'}
+                />
             </ul>
         </div>
     )
