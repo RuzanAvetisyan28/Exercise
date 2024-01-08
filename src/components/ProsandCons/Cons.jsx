@@ -6,6 +6,8 @@ import { selectConsValues } from "../../redux/ConsValues/selectors";
 import {v4 as uuidv4} from 'uuid'
 import DeleteIcon from '@mui/icons-material/Delete';
 import { Button } from "@mui/material";
+import { validationValues } from "../Utils";
+
 
 const Cons = (props) => {
 
@@ -18,7 +20,7 @@ const Cons = (props) => {
    
     const handleConsChange = (e) => {
           setConsValue(e.target.value);
-          const error =  validationConsValue(e.target.value)
+          const error =  validationValues (e.target.value, consValuesInArray)
           setErrorMessage(error);
     }
 
@@ -28,17 +30,10 @@ const Cons = (props) => {
       setConsValue('')
     };
 
-    const validationConsValue = (consName) => {
-
-      const isSameValue = consValuesInArray.some((item) => item[1].toLowerCase().trim() === consName.toLowerCase().trim())
-
-      return isSameValue ? "Pros name already exists" : ""
-  }
-
   const handleDeleteConsItems = () => {
-    console.log(2222222222)
       dispatch(deleteConsItems())
   }
+
     return(
       <div className='cons'>
             <h2>Cons</h2>
@@ -52,7 +47,7 @@ const Cons = (props) => {
                     className="btn btn-success custom-search-botton" 
                     type="submit"
                     onClick={() => handleClick()}
-                    disabled={!!errorMessage}
+                    disabled={!!errorMessage || !consValue}
 
                     >
                         AddCons
@@ -74,8 +69,10 @@ const Cons = (props) => {
             <ul className='ps-0'>
                 {consValues && Object.entries(consValues).map((item,index) => ( 
                     <ConsItems 
-                    value = {item[1]}
-                    id={item[0]}
+                      key={item[0]}
+                      value = {item[1]}
+                      id={item[0]}
+                      consItems={consValuesInArray} 
                     />
                 ))}
             </ul>

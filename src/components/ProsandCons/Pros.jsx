@@ -7,6 +7,7 @@ import { selectProsValues } from '../../redux/PropValues/selectors';
 import {v4 as uuidv4} from 'uuid'
 import { Button } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { validationValues } from '../Utils';
 
 const Pros = (props) => {
     const prosValues = useSelector(selectProsValues)
@@ -18,7 +19,7 @@ const Pros = (props) => {
 
     const handleProsChange = (e) => {
         setProsValue(e.target.value);
-       const error =  validationProsValue(e.target.value)
+       const error =  validationValues(e.target.value, prosValuesInArray)
 
        setErrorMessage(error);
     }
@@ -28,13 +29,6 @@ const Pros = (props) => {
         dispatch(setProsItem({prosValue,id}))
        setProsValue('')
     };
-
-    const validationProsValue = (prosName) => {
-
-        const isSameValue = prosValuesInArray.some((item) => item[1].toLowerCase().trim() === prosName.toLowerCase().trim())
-
-        return isSameValue ? "Pros name already exists" : ""
-    }
 
     const handleDeleteProsItems = () => {
         dispatch(deleteProsItems())
@@ -53,7 +47,7 @@ const Pros = (props) => {
                     className="btn btn-yellow custom-search-botton" 
                     type="submit"
                     onClick={() => handleClick()}
-                    disabled={!!errorMessage}
+                    disabled={!!errorMessage || !prosValue}
 
                     >
                         AddPros
@@ -75,8 +69,10 @@ const Pros = (props) => {
             <ul className='ps-0'>
                 {prosValues && Object.entries(prosValues).map((item,index) => ( 
                     <ProsItems 
-                    value = {item[1]}
-                    id={item[0]}
+                      key={item[0]}
+                      value = {item[1]}
+                      id={item[0]}
+                      prosItems={prosValuesInArray}
                     />
                 ))}
             </ul>

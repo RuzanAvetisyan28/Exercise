@@ -1,4 +1,4 @@
-import { DELETE_CONS_ITEM, SET_CONS_ITEM, SET_CONS_ITEMS, DELETE_CONS_ITEMS, SetConsValue } from "./types";
+import { DELETE_CONS_ITEM, SET_CONS_ITEM, SET_CONS_ITEMS, DELETE_CONS_ITEMS, SetConsValue, RENAME_CONS } from "./types";
 import { Dispatch } from 'redux';
 
 
@@ -32,9 +32,15 @@ export const deleteConsItems = () => (dispatch: Dispatch) => {
 };
 
 export const deleteConsItem = (id) => (dispatch: Dispatch) => {
-  console.log("111111111111")
   dispatch({
     type: DELETE_CONS_ITEM,
     payload:id,
+  });
+};
+
+export const renameConsName = (id, consValue) => (dispatch: Dispatch) => {
+  dispatch({
+    type: RENAME_CONS,
+    payload: id,consValue,
   });
 };

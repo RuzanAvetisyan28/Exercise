@@ -1,5 +1,10 @@
-import { useSelector } from "react-redux";
-import { DELETE_PROS_ITEMS, GET_PROS, REMOVE_PROS_ITEM, SET_PROS, SET_PROS_ITEMS } from "./types";
+import { 
+  DELETE_PROS_ITEMS, 
+  GET_PROS, REMOVE_PROS_ITEM, 
+  RENAME_PROS, 
+  SET_PROS, 
+  SET_PROS_ITEMS 
+} from "./types";
 
 const initialState = {};
   const prosReducer = (state = initialState, action) => {
@@ -15,6 +20,10 @@ const initialState = {};
           return Object.fromEntries(prosValues);
         case DELETE_PROS_ITEMS:
           return {}
+        case RENAME_PROS:
+          const values = {...state}
+          values[action.payload] = action.prosValue
+          return values
         default:
           return state;
       }

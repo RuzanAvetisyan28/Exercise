@@ -3,6 +3,7 @@ export const GET_PROS = 'GET_PROS';
 export const SET_PROS_ITEMS = 'SET_PROS_ITEMS';
 export const REMOVE_PROS_ITEM = 'REMOVE_PROS_ITEM';
 export const DELETE_PROS_ITEMS = 'DELETE_PROS_ITEMS';
+export const RENAME_PROS = 'RENAME_PROS';
 
 export interface SetProsValue {
     type: typeof SET_PROS;

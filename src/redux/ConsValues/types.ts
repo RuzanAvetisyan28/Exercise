@@ -3,6 +3,7 @@ export const SET_CONS_ITEMS = 'SET_CONS_ITEMS';
 export const DELETE_CONS_ITEM = 'DELETE_CONS_ITEM';
 export const DELETE_CONS_ITEMS = 'DELETE_CONS_ITEMS';
 export const GET_CONS = 'GET_CONS';
+export const RENAME_CONS = 'RENAME_CONS';
 
 export interface SetConsValue {
   type: typeof SET_CONS_ITEM;

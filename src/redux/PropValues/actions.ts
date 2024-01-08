@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { DELETE_PROS_ITEMS, GET_PROS, REMOVE_PROS_ITEM, SET_PROS, SET_PROS_ITEMS } from './types';
+import { DELETE_PROS_ITEMS, GET_PROS, REMOVE_PROS_ITEM, RENAME_PROS, SET_PROS, SET_PROS_ITEMS } from './types';
 
 
 export const setProsItem = (prosValue) => (dispatch : Dispatch) => {
@@ -32,5 +32,12 @@ export const removeProsItem = (id) => (dispatch: Dispatch) => {
 export const deleteProsItems = (item) => (dispatch: Dispatch) => {
   dispatch({
     type: DELETE_PROS_ITEMS,
+  });
+};
+
+export const renameProsName = (id, prosValue) => (dispatch: Dispatch) => {
+  dispatch({
+    type: RENAME_PROS,
+    payload: id,prosValue,
   });
 };

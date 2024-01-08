@@ -1,4 +1,4 @@
-import { SET_CONS_ITEM, GET_CONS, SET_CONS_ITEMS, DELETE_CONS_ITEM, DELETE_CONS_ITEMS} from "./types";
+import { SET_CONS_ITEM, GET_CONS, SET_CONS_ITEMS, DELETE_CONS_ITEM, DELETE_CONS_ITEMS, RENAME_CONS} from "./types";
 
 const initialState = {};
 const consReducer = (state = initialState, action) => {
@@ -13,7 +13,11 @@ const consReducer = (state = initialState, action) => {
         const consValus = Object.entries(state).filter((item) => item[0] !== action.payload)
         return Object.fromEntries(consValus);
       case DELETE_CONS_ITEMS:
-        return {}
+        return {};
+      case RENAME_CONS:
+        const consValues = {...state}
+        consValues[action.payload] = action.consValue
+        return consValues
       default:
         return state;
     }
